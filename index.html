@@ -1,63 +1,113 @@
-index.html
 <!DOCTYPE html>
 <html>
 <head>
   <title>Valentine 💖</title>
+
   <style>
     body {
       background-color: #ffe6f0;
       text-align: center;
       font-family: Arial, sans-serif;
-      padding-top: 100px;
+      padding-top: 80px;
+      overflow: hidden;
     }
+
     h1 { color: #ff3366; }
+
+    p {
+      font-size: 18px;
+      max-width: 600px;
+      margin: auto;
+      color: #444;
+      line-height: 1.6;
+    }
+
     button {
       font-size: 20px;
-      padding: 10px 25px;
+      padding: 12px 30px;
       margin: 20px;
       border: none;
-      border-radius: 10px;
+      border-radius: 30px;
       cursor: pointer;
+      position: relative;
     }
-    #yes { background-color: #ff4d6d; color: white; }
-    #no { background-color: #999; color: white; }
+
+    #yes {
+      background-color: #ff4d6d;
+      color: white;
+    }
+
+    #no {
+      background-color: #999;
+      color: white;
+      position: absolute;
+    }
+
+    .heart {
+      position: fixed;
+      bottom: -20px;
+      font-size: 20px;
+      animation: floatUp 5s linear infinite;
+      color: #ff4d6d;
+    }
+
+    @keyframes floatUp {
+      from { transform: translateY(0); opacity: 1; }
+      to { transform: translateY(-100vh); opacity: 0; }
+    }
   </style>
 </head>
 
 <body>
+
   <h1>Happy Valentine’s Day 💖</h1>
 
-<p style="font-size:18px; max-width:600px; margin:auto; color:#444; line-height:1.6;">
-To my favorite person, Nozomi 🌸<br><br>
+  <p>
+    To my favorite person, Nozomi 🌸<br><br>
 
-This is not a normal project.<br>
-This is a lifetime commitment disguised as code.<br><br>
+    This is not a normal project.<br>
+    This is a lifetime commitment disguised as code.<br><br>
 
-You feel like home.<br>
-You make my bad days softer.<br>
-You are my favorite person without trying.<br><br>
+    You feel like home.<br>
+    You make my bad days softer.<br>
+    You are my favorite person without trying.<br><br>
 
-From,<br>
-Pooja ❤️
-</p>
+    From,<br>
+    Pooja ❤️
+  </p>
 
-<h2 style="margin-top:40px;">Will you be my Valentine?</h2>
+  <h2 style="margin-top:40px;">Will you be my Valentine?</h2>
 
   <button id="yes" onclick="yesClicked()">YES 💖</button>
-  <button id="no" onclick="noClicked()">NO 🙄</button>
-
-  <h3 id="message"></h3>
+  <button id="no" onmouseover="moveNo()">NO 🙄</button>
 
   <script>
     function yesClicked() {
-      document.getElementById("message").innerHTML =
-        "Yayyy!! 💃💖 I knew it! I love you forever 😘";
+      document.body.innerHTML = `
+        <h1>YAYYY 💖💖💖</h1>
+        <h2>You are officially my Valentine 😘</h2>
+        <p>Congratulations on making the only correct choice 😌</p>
+      `;
     }
 
-    function noClicked() {
-      document.getElementById("message").innerHTML =
-        "Nice try 😌 but the answer is still YES 💖";
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
     }
+
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 5000);
+    }, 300);
   </script>
+
 </body>
 </html>
